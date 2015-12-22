@@ -1,0 +1,12 @@
+Automaton
+----
+
+This is a simple 2D cellular automaton as described by Stephen Wolfram's "A
+New Kind of Science," written in Java.
+
+The implementation takes an array of cells, represented as `int[]`, where
+"empty cells" contain a value of 0 and `filled cells` contain a value of 1.
+
+The automaton creates a new generation by accepting a pattern, represented
+as a value between 0 and 255. The pattern describes the generation by
+providing the generated value for a given octet.
