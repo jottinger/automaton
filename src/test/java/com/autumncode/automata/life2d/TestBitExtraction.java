@@ -27,27 +27,4 @@ public class TestBitExtraction {
             assertEquals(value, values[offset]);
         }
     }
-
-    @Test
-    public void testBitPattern() {
-        BitPattern bitPattern = new BitPattern(27);
-
-        assertEquals(bitPattern.getBit(0), 1);
-        assertEquals(bitPattern.getBit(1), 1);
-        assertEquals(bitPattern.getBit(2), 0);
-        assertEquals(bitPattern.getBit(3), 1);
-        assertEquals(bitPattern.getBit(4), 1);
-        assertEquals(bitPattern.getBit(5), 0);
-    }
-
-    @Test
-    public void testLife() {
-        int[] data = new int[256];
-        data[128] = 1;
-        Dataset ds = new Dataset(data);
-        for (int i = 0; i < 100; i++) {
-            System.out.println(ds.toString(" *"));
-            ds = ds.copy(30);
-        }
-    }
 }
