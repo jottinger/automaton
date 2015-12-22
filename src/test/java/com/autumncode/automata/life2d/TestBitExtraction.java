@@ -21,7 +21,7 @@ public class TestBitExtraction {
 
     @Test(dataProvider = "extractionData")
     public void testSimpleExtract(int[] input, int[] values) {
-        Dataset dataset = new Dataset(input);
+        ArrayDataset dataset = new ArrayDataset(input);
         for (int offset = 0; offset < input.length; offset++) {
             int value = dataset.getOctet(offset);
             assertEquals(value, values[offset]);
