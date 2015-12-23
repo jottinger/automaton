@@ -16,7 +16,23 @@ public class FastBitSetDataset implements Dataset {
         }
     }
 
+    public FastBitSetDataset(int length) {
+        this.length = length;
+    }
+
     FastBitSetDataset() {
+    }
+
+    public static void main(String[] args) {
+        int[] data = new int[200];
+        data[data.length / 2] = 1;
+        FastBitSetDataset ds = new FastBitSetDataset(data);
+        int pattern = (int) (Math.random() * 256);
+        System.out.println(pattern);
+        for (int i = 0; i < data.length / 2; i++) {
+            System.out.println(ds.toString("* "));
+            ds = ds.copy(pattern);
+        }
     }
 
     @Override
@@ -56,20 +72,16 @@ public class FastBitSetDataset implements Dataset {
     public String toString(String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            sb.append(data.get(i) ? s.charAt(0) : s.charAt(1));
+            sb.append(data.get(i) ? s.charAt(1) : s.charAt(0));
         }
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        int[] data = new int[200];
-        data[data.length / 2] = 1;
-        FastBitSetDataset ds = new FastBitSetDataset(data);
-        int pattern = (int) (Math.random() * 256);
-        System.out.println(pattern);
-        for (int i = 0; i < data.length / 2; i++) {
-            System.out.println(ds.toString("* "));
-            ds = ds.copy(pattern);
+    @Override
+    public void setCell(int offset, boolean alive) {
+        if (offset > length || offset < 0) {
+            throw new IllegalArgumentException("invalid offset " + offset + " for structure of length " + length);
         }
+        data.set(offset, alive);
     }
 }

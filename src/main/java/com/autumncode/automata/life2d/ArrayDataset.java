@@ -9,6 +9,10 @@ public class ArrayDataset implements Dataset {
         this(input, false);
     }
 
+    public ArrayDataset(int length) {
+        data = new int[length];
+    }
+
     public ArrayDataset(int[] input, boolean clean) {
         data = Arrays.copyOf(input, input.length);
         // if we were called externally, someone might
@@ -20,6 +24,25 @@ public class ArrayDataset implements Dataset {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        int[] data = new int[200];
+        data[data.length / 2] = 1;
+        Dataset ds = new ArrayDataset(data);
+        int pattern = (int) (Math.random() * 256);
+        System.out.println(pattern);
+        for (int i = 0; i < data.length / 2; i++) {
+            System.out.println(ds);
+            ds = ds.copy(pattern);
+        }
+    }
+
+    public void setCell(int offset, boolean alive) {
+        if (offset > data.length || offset < 0) {
+            throw new IllegalArgumentException("invalid offset " + offset + " for structure of length " + data.length);
+        }
+        data[offset] = (alive ? 1 : 0);
     }
 
     @Override
@@ -59,17 +82,5 @@ public class ArrayDataset implements Dataset {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(data).forEach(o -> sb.append(s.charAt(o)));
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        int[] data = new int[200];
-        data[data.length / 2] = 1;
-        Dataset ds = new ArrayDataset(data);
-        int pattern = (int) (Math.random() * 256);
-        System.out.println(pattern);
-        for (int i = 0; i < data.length / 2; i++) {
-            System.out.println(ds);
-            ds = ds.copy(pattern);
-        }
     }
 }

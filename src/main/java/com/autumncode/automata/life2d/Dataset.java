@@ -13,4 +13,6 @@ public interface Dataset {
     <T extends Dataset> T copy(int pattern);
 
     String toString(String chars);
+
+    void setCell(int offset, boolean alive);
 }
