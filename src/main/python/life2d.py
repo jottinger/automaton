@@ -1,41 +1,44 @@
-length=64
-pattern=30
+class Automaton2D:
+	def __init__(self, l=64, p=30):
+		self.length = l
+		self.pattern = p
+		self.data = [0] * self.length
+		self.data[self.length / 2] = 1
 
-data = [0] * length
-data[length/2]=1
+	def octet(self, offset):
+		value = 0
+		for j in self.data[max(0, offset - 1):min(self.length, offset + 2)]:
+			value = value * 2 + j
+		return value
 
-def getOctet(data, offset):
-	value=0
-	for i in data[max(0,offset-1):min(length,offset+2)]:
-		value=value*2 + i 
-	return value
+	def cellvalue(self, octet):
+		value = 0
+		if octet > 1:
+			value = (self.pattern >> (octet - 1)) & 1
+		return value
 
-def getCellValue(pattern, octet):
-	value=0
-	if(octet>1):
-		value=(pattern >> (octet-1)) & 1
-	return value
-	
-def nextGeneration(data, pattern):
-	gen=[0]*length
-	for i in range(1, len(data)):
-		if(getCellValue(pattern, getOctet(data, i))==1):
-			gen[i]=1
-	return gen
+	def formatted(self):
+		output = ""
+		for j in range(0, len(self.data)):
+			if self.data[j] == 1:
+				output += "*"
+			else:
+				output += " "
+		return output
 
-def printable(data):
-	output=""
-	for i in range(0, len(data)):
-		if(data[i]==1):
-			output=output+"*"
-		else:
-			output=output+" "
-	return output
+	def nextgeneration(self):
+		gen = [0] * self.length
+		for j in range(1, len(self.data)):
+			if self.cellvalue(self.octet(j)) == 1:
+				gen[j] = 1
+		self.data = gen
 
-#print getOctet(data, 30)
-#print getCellValue(30, 2)
-#print nextGeneration(data, pattern)
+	def dump(self):
+		print "length=", self.length
+		print "pattern=", self.pattern
 
-for i in range(0,len(data)/2):
-	print printable(data)
-	data=nextGeneration(data, pattern)
+
+d = Automaton2D()
+for i in range(0, 30):
+	d.nextgeneration()
+	print d.formatted()
