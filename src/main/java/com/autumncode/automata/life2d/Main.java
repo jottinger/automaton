@@ -7,9 +7,9 @@ import java.lang.reflect.Constructor;
 
 public class Main {
     @Parameter(names = "pattern")
-    int pattern = 30;
+    int pattern = 187;
     @Parameter(names = "length")
-    int length = 128;
+    int length = 120;
     @Parameter(names = "implementation")
     String implementation = "com.autumncode.automata.life2d.FastBitSetDataset";
 
