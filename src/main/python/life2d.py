@@ -35,5 +35,5 @@ class Automaton2D:
 
 d = Automaton2D()
 for i in range(0, 30):
-    d.nextgeneration()
     print d.formatted()
+    d.nextgeneration()
