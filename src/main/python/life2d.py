@@ -33,11 +33,6 @@ class Automaton2D:
                 gen[j] = 1
         self.data = gen
 
-    def dump(self):
-        print "length=", self.length
-        print "pattern=", self.pattern
-
-
 d = Automaton2D()
 for i in range(0, 30):
     d.nextgeneration()
