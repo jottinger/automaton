@@ -11,7 +11,7 @@ public class Main {
     @Parameter(names = "length")
     int length = 64;
     @Parameter(names = "implementation")
-    String implementation = "com.autumncode.automata.life2d.FastBitSetDataset";
+    String implementation = "com.autumncode.automata.life2d.ArrayDataset";
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
@@ -26,7 +26,7 @@ public class Main {
         Dataset ds = constructor.newInstance(length);
         ds.setCell(length / 2, true);
         for (int i = 0; i < length / 2; i++) {
-            System.out.println(ds.toString(" *"));
+            ds.getRenderer().render(ds);
             ds = ds.copy(pattern);
         }
 
