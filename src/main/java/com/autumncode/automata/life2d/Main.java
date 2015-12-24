@@ -11,7 +11,7 @@ public class Main {
     @Parameter(names = "length")
     int length = 64;
     @Parameter(names = "implementation")
-    String implementation = "com.autumncode.automata.life2d.ArrayDataset";
+    String implementation = "com.autumncode.automata.life2d.FastBitSetGeneration";
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
@@ -21,14 +21,12 @@ public class Main {
 
     private void run() throws Exception {
         @SuppressWarnings("unchecked")
-        Class<Dataset> datasetClass = (Class<Dataset>) Class.forName(implementation);
-        Constructor<Dataset> constructor = datasetClass.getConstructor(int.class);
-        Dataset ds = constructor.newInstance(length);
-        ds.setCell(length / 2, true);
+        Class<Generation> datasetClass = (Class<Generation>) Class.forName(implementation);
+        Constructor<Generation> constructor = datasetClass.getConstructor(int.class);
+        Generation ds = constructor.newInstance(length);
         for (int i = 0; i < length / 2; i++) {
-            ds.getRenderer().render(ds);
+            System.out.println(ds.toString());
             ds = ds.copy(pattern);
         }
-
     }
 }
