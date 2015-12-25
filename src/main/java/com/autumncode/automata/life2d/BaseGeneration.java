@@ -1,5 +1,7 @@
 package com.autumncode.automata.life2d;
 
+import com.autumncode.automata.life2d.renderer.SimpleStringRenderer;
+
 import java.io.StringWriter;
 
 /**
@@ -8,6 +10,44 @@ import java.io.StringWriter;
  */
 public abstract class BaseGeneration implements Generation {
     final int width;
+    int pattern = 0;
+    int iteration = 0;
+
+    /**
+     * Mutates the pattern used to create this generation
+     *
+     * @param pattern the new pattern
+     */
+    public void setPattern(int pattern) {
+        this.pattern = pattern;
+    }
+
+    /**
+     * Returns the pattern used to create this generation
+     *
+     * @return the pattern
+     */
+    public int getPattern() {
+        return pattern;
+    }
+
+    /**
+     * Mutates the iteration number of this generation
+     *
+     * @param iteration the new iteration number
+     */
+    public void setIteration(int iteration) {
+        this.iteration = iteration;
+    }
+
+    /**
+     * Returns the iteration of this particular generation
+     *
+     * @return the iteration
+     */
+    public int getIteration() {
+        return iteration;
+    }
 
     public BaseGeneration(int width) {
         if (width < 1) {
@@ -33,6 +73,8 @@ public abstract class BaseGeneration implements Generation {
                 target.setCell(offset, getBit(pattern, octet - 1));
             }
         }
+        target.setIteration(getIteration() + 1);
+        target.setPattern(pattern);
     }
 
     /**

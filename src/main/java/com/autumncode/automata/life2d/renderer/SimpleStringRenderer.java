@@ -1,4 +1,7 @@
-package com.autumncode.automata.life2d;
+package com.autumncode.automata.life2d.renderer;
+
+import com.autumncode.automata.life2d.Generation;
+import com.autumncode.automata.life2d.Renderer;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
