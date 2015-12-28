@@ -20,7 +20,7 @@ target/
 
 *~
 
-/*.png
+*.png
 
 .DS_Store
 

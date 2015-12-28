@@ -102,7 +102,7 @@ def main(argv):
     for i in range(0, length/2):
         r.render(d)
         d.nextgeneration()
-    r.write("foo.png")
+    r.write("bw-"+str(pattern)+".png")
     
 if __name__ == "__main__":
    main(sys.argv[1:])
