@@ -6,9 +6,9 @@ import com.beust.jcommander.Parameter;
 import java.lang.reflect.Constructor;
 
 public class Main {
-    @Parameter(names = "pattern")
+    @Parameter(names = {"--pattern","-p"})
     int pattern = 30;
-    @Parameter(names = "length")
+    @Parameter(names = {"--length","-l"})
     int length = 64;
     @Parameter(names = "implementation")
     String implementation = "com.autumncode.automata.life2d.FastBitSetGeneration";
