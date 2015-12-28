@@ -15,33 +15,33 @@ pattern is always set to a single living cell, in the middle of the
 structure.
 
 The pattern is a value from one to 255, which is broken down into a binary
-value (i.e., a pattern of 15 is broken down into a binary value `00001111`). 
+value (i.e., a pattern of 15 is broken down into a binary value 00001111). 
 
 To create a generation, each cell in the structure is examined, along with
 the two cells next to it, which yields an octet; if that octet is nonzero, 
 that octet is used as an index into the pattern.
 
-If you have a structure such as `0010`, then, an examination of the first
-cell (the leftmost) will give us an octet of `000` - which means no life in
+If you have a structure such as 0010, then, an examination of the first
+cell (the leftmost) will give us an octet of 000 - which means no life in
 the leftmost cell for the next generation.
 
-The second cell's value will be `001` (the second cell, and the surrounding
+The second cell's value will be 001 (the second cell, and the surrounding
 cells.) That means that the rightmost bit in the pattern is examined to see
 the next cell's generation; if our pattern is 15, then the rightmost bit is
 on, so the next generation's second cell will be on as well.
 
-The third cell's value will be `010`, so the second rightmost bit in the
-pattern is examined; the fourth cell's value is `100` (the cells are padded
+The third cell's value will be 010, so the second rightmost bit in the
+pattern is examined; the fourth cell's value is 100 (the cells are padded
 as lifeless on the edges) so the fourth rightmost bit in the pattern is
 used.
 
-The implementation takes an array of cells, represented as `int[]`, where
-"empty cells" contain a value of 0 and `filled cells` contain a value of 1.
+The implementation takes an array of cells, represented as int[], where
+"empty cells" contain a value of 0 and filled cells contain a value of 1.
 
-The second generation of the input pattern `00100` with a pattern of `15`
+The second generation of the input pattern 00100 with a pattern of 15
 looks like this:
 
-`
+
 	00100
 	01110
-`
+
