@@ -17,15 +17,13 @@ class MonochromeRenderer:
     def __init__(self, width, height):
         self.width=width
         self.height=height
-        self.image=Image.new('L',(width, height))
+        self.image=Image.new('L',(width, height),255)
         self.draw=ImageDraw.Draw(self.image)
 
     def render(self, generation):
         for j in range(1, len(generation.data)):
-            fill=255
             if generation.data[j] == 1:
-                fill=0
-            self.draw.line([(j,generation.generation),(j+1,generation.generation)],fill=fill)
+        		self.draw.line([(j,generation.generation),(j,generation.generation)],fill=0)
 
     def write(self, filename):
         self.image.save(filename, "PNG")
