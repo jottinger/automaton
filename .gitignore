@@ -23,3 +23,6 @@ target/
 /*.png
 
 .DS_Store
+
+# maven-generated POM for shaded artifact
+dependency-reduced-pom.xml
