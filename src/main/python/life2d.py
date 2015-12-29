@@ -71,38 +71,20 @@ class Automaton2D:
         self.generation+=1
 
 import sys
-import getopt
+import argparse
 
 def main(argv):
-    length=128
-    pattern=171
-    try:
-        opts, args = getopt.getopt(argv,"hl:p:",["length=","pattern="])
-    except getopt.GetoptError:
-        print 'life2d.py -l <length> -p <pattern>'
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print 'life2d.py -l <length> -p <pattern>'
-            sys.exit()
-        elif opt in ("-l", "--length"):
-            try:
-                length = int(arg)
-            except ValueError:
-                print "length is not numeric"
-                sys.exit()
-        elif opt in ("-p", "--pattern"):
-            try:
-                pattern = int(arg)
-            except ValueError:
-                print "pattern is not numeric"
-                sys.exit()
-    d = Automaton2D(length, pattern)
-    r=MonochromeRenderer(length,length/2)
-    for i in range(0, length/2):
-        r.render(d)
-        d.nextgeneration()
-    r.write("bw-"+str(pattern)+".png")
+	parser=argparse.ArgumentParser()
+	parser.add_argument("-p","--pattern", help="the bit pattern to use for subsequent generations",type=int,default=171)
+	parser.add_argument("-l", "--length", help="the length of the cell structure",type=int,default=128)
+	args=parser.parse_args()
+
+	d = Automaton2D(args.length, args.pattern)
+	r=MonochromeRenderer(args.length,args.length/2)
+	for i in range(0, args.length/2):
+	    r.render(d)
+	    d.nextgeneration()
+	r.write("bw-"+str(args.pattern)+".png")
     
 if __name__ == "__main__":
    main(sys.argv[1:])
